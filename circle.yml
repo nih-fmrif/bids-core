@@ -4,17 +4,17 @@ machine:
 
 dependencies:
   pre:
-    - docker build -t poldracklab/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM-${CIRCLE_SHA1:0:6} .
+    - docker build -t nihfmrif/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM-${CIRCLE_SHA1:0:6} .
 
 test:
   override:
     # Unit Tests
-    - docker run poldracklab/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM-${CIRCLE_SHA1:0:6} bin/runtests.sh unit --ci
+    - docker run nihfmrif/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM-${CIRCLE_SHA1:0:6} bin/runtests.sh unit --ci
 
 deployment:
   hub:
-    branch: master
+    branch: dsst
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker tag poldracklab/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM-${CIRCLE_SHA1:0:6} poldracklab/$CIRCLE_PROJECT_REPONAME:latest
-      - docker push poldracklab/$CIRCLE_PROJECT_REPONAME
+      - docker tag nihfmrif/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM-${CIRCLE_SHA1:0:6} nihfmrif/$CIRCLE_PROJECT_REPONAME:latest
+      - docker push nihfmrif/$CIRCLE_PROJECT_REPONAME
