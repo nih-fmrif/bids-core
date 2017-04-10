@@ -1,5 +1,6 @@
 # SciTran – Scientific Data Management
 
+[![CircleCI](https://circleci.com/gh/nih-fmrif/bids-core/tree/dsst.svg?style=shield&circle-token=23b4f2363af393753b7ac991e3151e903236fbf5)](https://circleci.com/gh/nih-fmrif/bids-core/tree/dsst)
 
 ### Usage
 ```
