@@ -47,6 +47,7 @@ class RequestHandler(webapp2.RequestHandler):
                 if r.ok:
                     identity = json.loads(r.content)
                     self.uid = identity.get('email')
+                    self.uid = self.uid.lower();
                     if not self.uid:
                         self.abort(400, 'OAuth2 token resolution did not return email address')
                     config.db.authtokens.replace_one({'_id': access_token}, {'uid': self.uid, 'timestamp': request_start}, upsert=True)
