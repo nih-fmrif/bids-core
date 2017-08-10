@@ -36,11 +36,19 @@ DEFAULT_CONFIG = {
         'ssl_cert': None,
     },
     'auth': {
+        'type': 'globus'
+    },
+    'google': {
         'client_id': '1052740023071-n20pk8h5uepdua3r8971pc6jrf25lvee.apps.googleusercontent.com',
         'id_endpoint': 'https://www.googleapis.com/plus/v1/people/me/openIdConnect',
         'auth_endpoint': 'https://accounts.google.com/o/oauth2/auth',
         'verify_endpoint': 'https://www.googleapis.com/oauth2/v1/tokeninfo',
-
+    },
+    'globus': {
+        'client_id': 'e8c97607-e511-4408-a9e7-d9ab9901b7b2',
+        'id_endpoint': 'https://auth.globus.org/v2/oauth2/userinfo',
+        'auth_endpoint': 'https://auth.globus.org/v2/oauth2/authorize',
+        'verify_endpoint': 'https://auth.globus.org/v2/oauth2/token',
     },
     'persistent': {
         'db_uri': 'mongodb://localhost:9001/scitran',
@@ -128,11 +136,12 @@ def get_config():
     return __config
 
 def get_public_config():
+    auth_type = get_item('auth', 'type');
     return {
         'created': __config.get('created'),
         'modified': __config.get('modified'),
         'site': __config.get('site'),
-        'auth': __config.get('auth'),
+        'auth': __config.get(auth_type),
     }
 
 def get_item(outer, inner):
