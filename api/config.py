@@ -3,6 +3,7 @@ import copy
 import logging
 import pymongo
 import datetime
+import ssl
 
 
 logging.basicConfig(
@@ -81,6 +82,7 @@ db = pymongo.MongoClient(
     connectTimeoutMS=__config['persistent']['db_connect_timeout'],
     serverSelectionTimeoutMS=__config['persistent']['db_server_selection_timeout'],
     connect=False, # Connect on first operation to avoid multi-threading related errors
+    ssl_cert_reqs=ssl.CERT_NONE
 ).get_default_database()
 log.debug(str(db))
 
